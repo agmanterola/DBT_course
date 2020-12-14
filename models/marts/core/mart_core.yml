@@ -1,0 +1,25 @@
+version: 2
+
+models:
+
+    - name: dim_customers
+      columns: 
+        - name: customer_id
+          tests:
+            - unique
+            - not_null
+
+    - name: fct_orders
+      columns:
+        - name: order_id
+          tests:
+            - not_null
+        - name: customer_id        
+          tests:
+            - not_null
+        - name: order_date
+          tests:
+            - not_null
+      tests:        
+        - unique:
+           column_name: "order_id || '-' || customer_id || '-' || order_date"

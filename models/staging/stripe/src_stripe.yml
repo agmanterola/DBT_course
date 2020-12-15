@@ -17,3 +17,10 @@ sources:
               tests:
                 - unique
                 - not_null
+            - name: orderid
+              description: Order identificator. It should be FK to order table.
+              tests:
+                - not_null
+                - relationships: 
+                    to: source('jaffle_shop','orders')
+                    field: id

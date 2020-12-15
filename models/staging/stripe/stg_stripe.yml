@@ -3,10 +3,14 @@ version: 2
 models:
 
     - name: stg_payments
+      description: Stage table for received payments and their status.
       columns: 
         - name: payment_id
           tests:
             - unique
             - not_null
-
+        - name: order_id,
+          description: Order identificator. At this level does not exist as the foreign key of the order. I think it should, but id doesn't.
+        - name: status
+          description: '{{ doc("payment_status") }}'        
  

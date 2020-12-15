@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+    - name: stripe
+      description: A clone of a Postgres application database.
+      database: raw
+      tables: 
+        - name: payment
+          loaded_at_field: _batched_at
+          freshness:
+            warn_after: {count: 15, period: day}
+            error_after: {count: 100, period: day}
+          description: Raw payments data.
+          columns: 
+            - name: id
+              description: Payment Primary Key.
+              tests:
+                - unique
+                - not null

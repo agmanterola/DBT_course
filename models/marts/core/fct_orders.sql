@@ -14,7 +14,7 @@ order_payment as (
     select 
         orders.order_id as order_id,
         orders.customer_id as customer_id,
-        sum(case when orders.status = 'success' then payments.amount end) as amount
+        sum(case when payments.status = 'success' then payments.amount end) as amount
     from orders inner join payments on orders.order_id = payments.order_id
     group by orders.order_id,orders.customer_id
 ),
@@ -31,4 +31,4 @@ final as (
     left join order_payment using (order_id)
 )
 
-select * from final where order_date is null
+select * from final
